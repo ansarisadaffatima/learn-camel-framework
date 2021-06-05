@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.microservices.camle.microservicea.Utility;
 
-@Component
+//@Component
 public class MyRouteA extends RouteBuilder {
 
 	@Autowired
