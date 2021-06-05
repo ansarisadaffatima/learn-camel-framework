@@ -10,42 +10,51 @@ import org.springframework.stereotype.Component;
 import com.example.microservices.camle.microservicea.Utility;
 
 @Component
-public class MyRouteA extends RouteBuilder{
-
-	
+public class MyRouteA extends RouteBuilder {
 
 	@Autowired
 	Utility utility;
-	
+
 	@Override
 	public void configure() throws Exception {
-		//from("timer:my-first-timer")
-		//.transform().constant("My Message")
-		//.transform().constant("The time is "+LocalDateTime.now())
-		//.bean("utility","getCurrentTime")
-		//.log(message)
-		//.log("${body}")
-		//.process(new SimpleProcessor())
-		//.to("log:my-first-timer");
-		
+		/*
+		 * from("timer:my-first-timer") .transform().constant("My Message")
+		 * .transform().constant("The time is "+LocalDateTime.now())
+		 * .bean("utility","getCurrentTime") .log(message) .log("${body}")
+		 * .process(new SimpleProcessor()) .to("log:my-first-timer");
+		 */
+
 		// Simple File Movement
 		/*
 		 * from("file:input/files") .log("Moved") .to("file:output/files");
 		 */
-		
-		from("timer:active-mq-timer?period=10000")
-		.transform().constant("My message for Active MQ")
-		.log("${body}")
-		.to("activemq:active-mq-timer");
+
+		// Publishing message to AcitveMQ after 10s
+		/*
+		 * from("timer:active-mq-timer?period=10000")
+		 * .transform().constant("My message for Active MQ") .log("${body}")
+		 * .to("activemq:my-activemq-queue");
+		 */
+
+		// Sending JSON File using activemq
+		// from("file:json").log("${body}").to("activemq:my-activemq-queue");
+
+		// Sending XML File
+		//from("file:xml").log("${body}").to("activemq:my-activemqxml-queue");
+
+		// Sending JSON File using kafka
+		from("file:json").
+		log("${body}").
+		to("kafka:myKafkaTopic");
 	}
 
-	
 }
 
 @Component
 class SimpleProcessor implements Processor {
 
 	Logger logger = org.slf4j.LoggerFactory.getLogger(SimpleProcessor.class);
+
 	@Override
 	public void process(Exchange exchange) throws Exception {
 		// TODO Auto-generated method stub
@@ -53,4 +62,3 @@ class SimpleProcessor implements Processor {
 	}
 
 }
-

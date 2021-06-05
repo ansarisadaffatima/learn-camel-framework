@@ -5,23 +5,19 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.4.5</version>
+		<version>2.4.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example.microservices</groupId>
-	<artifactId>camle.microservice-a</artifactId>
+	<groupId>com.example.camel.microservice</groupId>
+	<artifactId>camel-microservice-restconsumer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>camle.microservice-a</name>
+	<name>camel-microservice-restconsumer</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<camel.version>3.9.0</camel.version>
+		<camel.version>3.10.0</camel.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
@@ -33,14 +29,10 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-activemq-starter</artifactId>
+			<artifactId>camel-http-starter</artifactId>
 			<version>${camel.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-kafka-starter</artifactId>
-			<version>${camel.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

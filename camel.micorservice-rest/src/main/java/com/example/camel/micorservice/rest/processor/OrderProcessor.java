@@ -13,8 +13,7 @@ public class OrderProcessor implements Processor{
 
 	@Autowired
 	OrderService service;
-	
-	@Override
+
 	public void process(Exchange exchange) throws Exception {
 		service.addOrder(exchange.getIn().getBody(Order.class));
 	}
