@@ -2,12 +2,11 @@ package com.example.microservices.camle.microserviceb.routes;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import com.example.microservices.camle.microserviceb.utility.CurrencyExchangeProcessor;
 import com.example.microservices.camle.microserviceb.utility.CurrencyExchangeTransformer;
 
-@Component
+//@Component
 public class MyRouteB extends RouteBuilder {
 
 	@Autowired
