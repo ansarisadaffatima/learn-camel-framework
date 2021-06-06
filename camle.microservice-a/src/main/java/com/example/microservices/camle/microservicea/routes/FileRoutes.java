@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class FileRoutes extends RouteBuilder{
 
 	@Autowired
@@ -22,7 +22,7 @@ public class FileRoutes extends RouteBuilder{
 		from("file:files/input")
 		.routeId("Input-Files-Route")
 		.transform().body(String.class)
-		.choice()
+		.choice() // Content based routing
 		.when(simple("${file:ext} ends with 'xml'"))
 		.log("XML File")
 		//.when(simple("${body} contains 'USD'"))
@@ -35,6 +35,7 @@ public class FileRoutes extends RouteBuilder{
 		//.to("direct://log-file-values")
 		.to("file:files/output");
 
+		// Pipeline pattern sequence of steps
 		from("direct:log-file-values")
 		.log("${messageHistory} ${file:absolute.path}")
 		.log("${file:name} ${file:name.ext} ${file:name.noext} ${file:onlyname}")

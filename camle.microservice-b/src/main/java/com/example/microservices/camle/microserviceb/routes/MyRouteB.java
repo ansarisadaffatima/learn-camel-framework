@@ -1,14 +1,13 @@
 package com.example.microservices.camle.microserviceb.routes;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-import com.example.microservices.camle.microserviceb.model.CurrencyExchange;
 import com.example.microservices.camle.microserviceb.utility.CurrencyExchangeProcessor;
 import com.example.microservices.camle.microserviceb.utility.CurrencyExchangeTransformer;
 
-//@Component
+@Component
 public class MyRouteB extends RouteBuilder {
 
 	@Autowired
@@ -40,12 +39,17 @@ public class MyRouteB extends RouteBuilder {
 		.bean(transformer)
 		.to("log:Received Message from active-mq");*/
 
-		from("kafka:myKafkaTopic")
+		// Kafka Topic consumer
+		/*from("kafka:myKafkaTopic")
 		.unmarshal()
 		.json(JsonLibrary.Jackson,CurrencyExchange.class)
 		.bean(processor)
 		.bean(transformer)
-		.to("log:Received Message from Kafka");
+		.to("log:Received Message from Kafka");*/
+
+		from("activemq:activemq-split")
+		//.log("${body}")
+		.to("log:message-received-a-activemq-split");
 
 	}
 }
